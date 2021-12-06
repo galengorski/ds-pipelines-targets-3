@@ -5,3 +5,11 @@
 
 # Specific files/dirs to ignore for this pipeline
 */tmp/*
+
+# targets files
+_targets/*
+
+# mapping outputs
+3_visualize/out/*
+
+
