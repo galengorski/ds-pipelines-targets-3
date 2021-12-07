@@ -8,6 +8,7 @@ tar_option_set(packages = c("tidyverse", "dataRetrieval", "urbnmapr", "rnaturale
 
 # Load functions needed by targets below
 source("1_fetch/src/find_oldest_sites.R")
+source("1_fetch/src/get_state_inventory.R")
 source("1_fetch/src/get_site_data.R")
 source("3_visualize/src/map_sites.R")
 
@@ -19,20 +20,11 @@ parameter <- c('00060')
 list(
   # Identify oldest sites
   tar_target(oldest_active_sites, find_oldest_sites(states, parameter)),
-
-  # PULL SITE DATA HERE
-  #Wisconsin
-  #tar_target(wi_data,get_site_data(oldest_active_sites, states[1], parameter)),
-  #Minnesota
-  #tar_target(mn_data, get_site_data(oldest_active_sites, states[2], parameter)),
-  #Michigan
-  #tar_target(mi_data, get_site_data(oldest_active_sites, states[3], parameter)),
-
+  # insert branching step
   tar_map(
     values = tibble(state_abb = states),
-    tar_target(nwis_data, get_site_data(oldest_active_sites, state_abb, parameter))
-    # Insert step for tallying data here
-    # Insert step for plotting data here
+    tar_target(nwis_inventory, get_state_inventory(sites_info = oldest_active_sites, state_abb)),
+    tar_target(nwis_data, get_site_data(nwis_inventory, state_abb, parameter))
   ),
 
   # Map oldest sites
