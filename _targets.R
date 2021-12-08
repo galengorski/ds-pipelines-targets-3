@@ -13,7 +13,7 @@ source("1_fetch/src/get_site_data.R")
 source("3_visualize/src/map_sites.R")
 
 # Configuration
-states <- c('WI','MN','MI','IL')
+states <- c('WI','MN','MI','IL','IN','IA')
 parameter <- c('00060')
 
 # Targets
