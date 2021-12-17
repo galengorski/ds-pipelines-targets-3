@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.html
+.png
 
 # Specific files/dirs to ignore for this pipeline
 */tmp/*
