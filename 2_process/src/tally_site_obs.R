@@ -10,8 +10,8 @@ tally_site_obs <- function(site_data) {
     summarize(NumObs = length(which(!is.na(Value))), .groups = "keep")
 }
 
-#from combiners issue #10
-combine_obs_tallies <- function(...){
-  combined_obs_tallies <- bind_rows(...)
-  return(combined_obs_tallies)
-}
+# #from combiners issue #10
+# combine_obs_tallies <- function(...){
+#   combined_obs_tallies <- bind_rows(...)
+#   return(combined_obs_tallies)
+# }
