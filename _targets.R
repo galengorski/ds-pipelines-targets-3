@@ -25,8 +25,8 @@ source("3_visualize/src/map_timeseries.R")
 states <- c('AL','AZ','AR','CA','CO','CT','DE','DC','FL','GA','ID','IL','IN','IA',
             'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH',
             'NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
-            'UT','VT','VA','WA','WV','WI','WY','AK','HI','GU','PR')
-parameter <- c('00060')
+            'UT','VA','WA','WV','WI','WY','AK','HI','PR')
+parameter <- c('00010')
 
 # Targets
 list(
@@ -42,7 +42,7 @@ list(
   #download
   tar_target(nwis_data,
              retry::retry(get_site_data(nwis_inventory, nwis_inventory$state_cd, parameter),
-                          when = 'Ugh, the internet data transfer failed! Try again.', max_tries = 10),
+                          when = 'Ugh, the internet data transfer failed! Try again.', max_tries = 30),
              pattern = map(nwis_inventory)),
   #tally site data
   tar_target(tally, tally_site_obs(nwis_data), pattern = map(nwis_data)),
